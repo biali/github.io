@@ -1,8 +1,10 @@
 const CACHE_NAME = 'robrowser-cache-v1';
 const urlsToCache = [
-  '/styles/index.css',
-  '/styles/style.css',
-  // Add other critical assets here
+    '/',
+    '/Online.js'
+//   '/styles/index.css',
+//   '/styles/style.css',
+//  Add other critical assets here
 ];
 
 // Install event - Cache critical assets
