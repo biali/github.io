@@ -10,16 +10,16 @@
 	</head>
 	<body>
 		<script>
-		// Register the service worker
-		if ('serviceWorker' in navigator) {
-			navigator.serviceWorker.register('/service-worker.js')
-			.then((registration) => {
-				console.log('Service Worker registered:', registration);
-			})
-			.catch((error) => {
-				console.log('Service Worker registration failed:', error);
-			});
-		}
+			// Register the service worker
+			if ('serviceWorker' in navigator) {
+				navigator.serviceWorker.register('/service-worker.js')
+				.then((registration) => {
+					console.log('Service Worker registered...');
+				})
+				.catch((error) => {
+					console.log('Service Worker registration failed:', error);
+				});
+			}
 
 			// Check if assets are cached before starting the client
 			async function startClientWhenCached() {
@@ -41,53 +41,54 @@
 				});
 			}
 
-		// Start client function
-		function startClient() {
-			console.log("Assets cached. Starting client...");
-			window.ROConfig = {
-			development: false,
-			enableConsole: true,
-			remoteClient: "https://ragnamania.org/client/",
-			version: '20241030.0',
-			servers: [
-				{
-				display: 'Ragnamania Play',
-				desc: "O verdadeiro sabor da fruta!",
-				address: 'mania.hopto.org',
-				port: 6900,
-				version: 55,
-				langtype: 1,
-				packetver: 20211103,
-				socketProxy: "ws://mania.hopto.org:5999/",
-				packetKeys: false,
-				renewal: false,
-				forceUseAddress: false,
-				},
-			],
-			grfFiles: 'DATA.INI',
-			packetDump: false,
-			skipServerList: true,
-			skipIntro: true,
-			clientVersionMode: 'PacketVer',
-			plugins: {},
-			clientHash: null,
-			enableCashShop: false,
-			enableBank: false,
-			enableMapName: true,
-			enableRefineUI: false,
-			enableCheckAttendance: false,
-			CameraMaxZoomOut: 3,
-			loadLua: false,
-			};
-
-			const script = document.createElement('script');
-			script.type = 'text/javascript';
-			script.src = 'Online.js';
-			document.getElementsByTagName('body')[0].appendChild(script);
-		}
-
-		// Call the function to start client when assets is cached
-		window.addEventListener("load", startClientWhenCached);
+			// Start client function
+			function startClient() {
+				console.log("Assets cached. Starting client...");
+				window.ROConfig = {
+				development: false,
+				enableConsole: true,
+				remoteClient: "https://ragnamania.org/client/",
+				version: '20241030.0',
+				servers: [
+					{
+					display: 'Ragnamania Play',
+					desc: "O verdadeiro sabor da fruta!",
+					address: 'mania.hopto.org',
+					port: 6900,
+					version: 55,
+					langtype: 1,
+					packetver: 20211103,
+					socketProxy: "ws://mania.hopto.org:5999/",
+					remoteClient: "https://ragnamania.org/client/",
+					packetKeys: false,
+					renewal: false,
+					forceUseAddress: false,
+					},
+				],
+				grfFiles: 'DATA.INI',
+				packetDump: false,
+				skipServerList: true,
+				skipIntro: true,
+				clientVersionMode: 'PacketVer',
+				plugins: {},
+				clientHash: null,
+				enableCashShop: false,
+				enableBank: false,
+				enableMapName: true,
+				enableRefineUI: false,
+				enableCheckAttendance: false,
+				CameraMaxZoomOut: 3,
+				loadLua: false,
+				};
+	
+				const script = document.createElement('script');
+				script.type = 'text/javascript';
+				script.src = 'Online.js';
+				document.getElementsByTagName('body')[0].appendChild(script);
+			}
+	
+			// Call the function to start client when assets is cached
+			window.addEventListener("load", startClientWhenCached);
 		</script>
 		<div id="DialogueBox"></div>
 	</body>
