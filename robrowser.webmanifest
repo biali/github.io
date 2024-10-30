@@ -16,8 +16,7 @@
             "purpose": "any"
         }
     ],
-    "start_url": "/index.html?fullscreen=true",
-    "display_override": ["standalone", "minimal-ui"],
+    "start_url": "/index.html",
     "display": "fullscreen",
     "theme_color": "#000000",
     "background_color": "#000000"
