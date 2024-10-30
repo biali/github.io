@@ -1,0 +1,24 @@
+{
+    "name": "Ragnamania Play",
+    "short_name": "Ragnamania",
+    "description": "O verdadeiro sabor da fruta!",
+    "icons": [
+        {
+            "src": "/static/img/icon_128.png",
+            "sizes": "128x128",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/static/img/icon_250.png",
+            "sizes": "250x250",
+            "type": "image/png",
+            "purpose": "any"
+        }
+    ],
+    "start_url": "/index.html?fullscreen=true",
+    "display_override": ["standalone", "minimal-ui"],
+    "display": "fullscreen",
+    "theme_color": "#000000",
+    "background_color": "#000000"
+}

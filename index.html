@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+		<title>Ragnamania Play</title>
+		<link rel="stylesheet" type="text/css" href="/styles/style.css">
+		<script src="https://kit.fontawesome.com/b0077963a2.js" crossorigin="anonymous"></script>
+		<script src="https://unpkg.com/typeit@8.7.1/dist/index.umd.js"></script>
+		<link rel="manifest" href="/robrowser.webmanifest">
+	</head>
+	<body>
+		<script>
+		// Register the service worker
+		if ('serviceWorker' in navigator) {
+			navigator.serviceWorker.register('/service-worker.js')
+			.then((registration) => {
+				console.log('Service Worker registered:', registration);
+			})
+			.catch((error) => {
+				console.log('Service Worker registration failed:', error);
+			});
+		}
+
+			// Check if assets are cached before starting the client
+			async function startClientWhenCached() {
+				const cache = await caches.open('robrowser-cache-v1');
+				const mapResponse = await cache.match('/Online.js');
+				if (mapResponse) {
+					// Dynamically set the height for mobile standalone mode
+					if (window.matchMedia('(display-mode: standalone)').matches) {
+						const setFullHeight = () => {
+							document.documentElement.style.setProperty('--app-height', `${window.innerHeight}px`);
+						};
+						setFullHeight();
+						window.addEventListener('resize', setFullHeight);
+					}
+
+					startClient();
+				} else {
+					console.log("Waiting for assets to cache...");
+					setTimeout(startClientWhenCached, 1000);  // Retry every second
+				}
+			}
+
+		// Start client function
+		function startClient() {
+			console.log("Assets cached. Starting client...");
+			window.ROConfig = {
+			development: false,
+			enableConsole: true,
+			remoteClient: "https://ragnamania.org/client/",
+			version: '20241030.0',
+			servers: [
+				{
+				display: 'Ragnamania Play',
+				desc: "O verdadeiro sabor da fruta!",
+				address: 'mania.hopto.org',
+				port: 6900,
+				version: 55,
+				langtype: 1,
+				packetver: 20211103,
+				socketProxy: "ws://mania.hopto.org:5999/",
+				packetKeys: false,
+				renewal: false,
+				forceUseAddress: false,
+				},
+			],
+			grfFiles: 'DATA.INI',
+			packetDump: false,
+			skipServerList: true,
+			skipIntro: true,
+			clientVersionMode: 'PacketVer',
+			plugins: {},
+			clientHash: null,
+			enableCashShop: false,
+			enableBank: false,
+			enableMapName: true,
+			enableRefineUI: false,
+			enableCheckAttendance: false,
+			CameraMaxZoomOut: 3,
+			loadLua: false,
+			};
+
+			const script = document.createElement('script');
+			script.type = 'text/javascript';
+			script.src = 'Online.js';
+			document.getElementsByTagName('body')[0].appendChild(script);
+		}
+
+		// Call the function to start client when assets is cached
+		window.addEventListener("load", startClientWhenCached);
+		</script>
+		<div id="DialogueBox"></div>
+	</body>
+</html>
