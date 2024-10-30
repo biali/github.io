@@ -12,33 +12,27 @@
 		<script>
 			// Register the service worker
 			if ('serviceWorker' in navigator) {
-				navigator.serviceWorker.register('/service-worker.js')
-				.then((registration) => {
-					console.log('Service Worker registered...');
-				})
-				.catch((error) => {
-					console.log('Service Worker registration failed:', error);
-				});
+			  navigator.serviceWorker.register('/service-worker.js')
+			    .then((registration) => {
+			      console.log('Service Worker registered...');
+			      startClientWhenCached();
+			    })
+			    .catch((error) => {
+			      console.log('Service Worker registration failed:', error);
+			    });
 			}
-
-			// Check if assets are cached before starting the client
+			
+			// Start client when assets are cached
 			async function startClientWhenCached() {
-				async function cacheFiles() {
-					const cache = await caches.open(cacheName);
-					await cache.addAll(filesToCache);
-				}
-				
-				cacheFiles().then(() => {
-					// Only proceed when all files are cached
-					if (window.matchMedia('(display-mode: standalone)').matches) {
-						const setFullHeight = () => {
-				      			document.documentElement.style.setProperty('--app-height', `${window.innerHeight}px`);
-				    		};
-				    		setFullHeight();
-				    		window.addEventListener('resize', setFullHeight);
-					}
-					startClient(); // Start the client now that files are cached
-				});
+			  // Ensure standalone mode and adjust height if needed
+			  if (window.matchMedia('(display-mode: standalone)').matches) {
+			    const setFullHeight = () => {
+			      document.documentElement.style.setProperty('--app-height', `${window.innerHeight}px`);
+			    };
+			    setFullHeight();
+			    window.addEventListener('resize', setFullHeight);
+			  }
+			  startClient(); // Start the client after confirming assets are cached
 			}
 
 			// Start client function
