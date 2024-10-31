@@ -2,29 +2,30 @@
 <html>
 	<head>
 		<title>Ragnamania Play</title>
-		<link rel="manifest" href="/robrowser.webmanifest">
-<!-- 		<link rel="stylesheet" type="text/css" href="/styles/style.css"> -->
-<!-- 		<link rel="stylesheet" type="text/css" href="/styles/index.css"> -->
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 		<meta name="mobile-web-app-capable" content="yes" />
 		<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
 		<meta name="theme-color" content="#ff8cb5">
-<!-- 		<script src="https://kit.fontawesome.com/b0077963a2.js" crossorigin="anonymous"></script> -->
-<!-- 		<script src="https://unpkg.com/typeit@8.7.1/dist/index.umd.js"></script> -->
+		<link rel="manifest" href="/robrowser.webmanifest">
+		<link rel="stylesheet" type="text/css" href="/styles/style.css">
+		<link href="/static/fonts/fa/css/fontawesome.css" rel="stylesheet" />
+  		<link href="/static/fonts/fa/css/brands.css" rel="stylesheet" />
+  		<link href="/static/fonts/fa/css/solid.css" rel="stylesheet" />
+		<script src="/static/js/typer.js"></script>
 	</head>
 	<body>
 		<script>
 			//Register the service worker
-			// if ('serviceWorker' in navigator) {
-			//   navigator.serviceWorker.register('/service-worker.js')
-			//     .then((registration) => {
-			//       console.log('Service Worker registered...');
-			//       startClientWhenCached();
-			//     })
-			//     .catch((error) => {
-			//       console.log('Service Worker registration failed:', error);
-			//     });
-			// }
+			if ('serviceWorker' in navigator) {
+			  navigator.serviceWorker.register('/service-worker.js')
+			    .then((registration) => {
+			      console.log('Service Worker registered...');
+			      startClientWhenCached();
+			    })
+			    .catch((error) => {
+			      console.log('Service Worker registration failed:', error);
+			    });
+			}
 			
 			// Start client when assets are cached
 			async function startClientWhenCached() {
