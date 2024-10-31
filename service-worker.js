@@ -1,9 +1,7 @@
 const CACHE_NAME = 'robrowser-cache-v1';
 const urlsToCache = [
-    '/',
-    '/Online.js'
-//   '/styles/index.css',
-//   '/styles/style.css',
+  '/styles/index.css',
+  '/styles/style.css',
 //  Add other critical assets here
 ];
 
